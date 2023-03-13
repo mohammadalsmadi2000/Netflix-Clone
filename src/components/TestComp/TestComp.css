@@ -1,0 +1,37 @@
+.hero-section {
+    background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/5523db5a-e2b2-497f-a88b-61f175c3dbad/87e2b372-56d8-4e61-9818-4a55f233a5ed/JO-ar-20230306-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-section p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .hero-section button {
+    font-size: 1.2rem;
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .hero-section button:hover {
+    background-color: #fff;
+    color: #e50914;
+  }

@@ -45,7 +45,7 @@ function ModalMovie({ showModal, handelClose, item }) {
                     <Button variant="secondary" onClick={handelClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={postMovie.bind(this, item)}>
+                    <Button style={{backgroundColor:'#e50914'}} variant="primary" onClick={postMovie.bind(this, item)}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

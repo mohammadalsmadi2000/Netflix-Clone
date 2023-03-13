@@ -1,6 +1,7 @@
 .div-MovieList{
     display: flex;
-    margin-left: 100px;
+    margin-left: 70px;
     margin-top: 40px;
-    
+   
+    background-color: #141414;
 }
