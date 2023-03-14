@@ -6,11 +6,8 @@ import ModalMovie from '../ModalMovie/ModalMovie';
 import { Text } from 'react-native-web';
 
 function Movie({ img, overview, release_date, title, item }) {
-    const [numOfLine, setNumOfLine] = useState(5);
     const [showModal, setShowModal] = useState(false);
-    const [getItem, setGetItem] = useState({});
     function handelAddFav(item) {
-        setGetItem(item);
         setShowModal(true);
     }
     function handelClose() {
@@ -29,7 +26,6 @@ function Movie({ img, overview, release_date, title, item }) {
                     </Card.Text>
                     <div style={{ marginBottom: "20px" }}>
                         <Text numberOfLines={6} >{overview}</Text>
-
                     </div>
                     <Button style={{ backgroundColor: '#e50914' }} variant="primary" onClick={handelAddFav}  >add to favorite</Button>
                 </Card.Body>

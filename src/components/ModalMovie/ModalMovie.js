@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 
 function ModalMovie({ showModal, handelClose, item }) {
     const [comment, setComment] = useState("");
-    const [confirm, setConfirm] = useState(false);
+
     function postMovie(item) {
         axios.post('https://movies-library-production-6ce9.up.railway.app/Movies', {
             "title": item.title,
@@ -45,7 +45,7 @@ function ModalMovie({ showModal, handelClose, item }) {
                     <Button variant="secondary" onClick={handelClose}>
                         Close
                     </Button>
-                    <Button style={{backgroundColor:'#e50914'}} variant="primary" onClick={postMovie.bind(this, item)}>
+                    <Button style={{ backgroundColor: '#e50914' }} variant="primary" onClick={postMovie.bind(this, item)}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

@@ -3,11 +3,10 @@ import React, { useState } from 'react'
 import Movie from '../Movie/Movie';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import'./MovieList.css'
+import './MovieList.css'
 
 
 function MovieList({ data }) {
-    const [getItem, setGetItem] = useState({});
 
 
     return (
