@@ -32,7 +32,6 @@ const NavbarNew = () => {
       <Link to="/" className="navbar-logo">
         Netflix
       </Link>
-      
       <div className="navbar-menu">
         <Link to="/" className="navbar-menu-item">
         Home
@@ -40,7 +39,6 @@ const NavbarNew = () => {
         <Link to="/favorite" className="navbar-menu-item">
         Favorite
         </Link>
-        
       </div>
     </nav>
   );

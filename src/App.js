@@ -8,12 +8,11 @@ import HeroSection from './components/TestComp/TestComp';
 function App() {
   return (
     <>
-    <div className='div-App'>
-    <NavbarNew />
-      <HeroSection/>
-      <Home />
-
-    </div>
+      <div className='div-App'>
+        <NavbarNew />
+        <HeroSection />
+        <Home />
+      </div>
 
 
     </>
