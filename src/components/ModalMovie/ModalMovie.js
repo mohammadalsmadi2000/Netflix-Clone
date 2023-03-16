@@ -1,16 +1,19 @@
 
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
 
-function ModalMovie({ showModal, handelClose, item }) {
+function ModalMovie({ showModal, handelClose, item, dataFromServer, handelUpdate, id }) {
     const [comment, setComment] = useState("");
+    const [disabled, setDisabled] = useState(false);
 
-    function postMovie(item) {
-        axios.post('https://movies-library-production-6ce9.up.railway.app/Movies', {
+    async function postMovie(item) {
+
+        await axios.post('https://movies-library-production-6ce9.up.railway.app/Movies', {
             "title": item.title,
             "release_date": item.release_date,
             "overview": item.overview,
@@ -20,16 +23,36 @@ function ModalMovie({ showModal, handelClose, item }) {
             .then(function (response) {
                 handelClose();
 
-                alert("your data was added !");
+
+
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            }).finally(function () {
+                window.location.reload();
+
+            })
+    }
+    useEffect(() => {
+        dataFromServer.forEach((el) => {
+            if (el.title === item.title) setDisabled(true);
+        })
+    }, [disabled])
+
+    function handelUpdateFromModal(id,item,comment) {
+
+        handelUpdate(id,item,comment).then(()=>{
+            handelClose();
+
+        })
+        
     }
 
+    console.log(disabled)
     return (
         <>
-            <Modal show={showModal} onHide={handelClose}>
+
+            <Modal show={showModal.show} onHide={handelClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{item.title}</Modal.Title>
                 </Modal.Header>
@@ -42,12 +65,15 @@ function ModalMovie({ showModal, handelClose, item }) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
+
                     <Button variant="secondary" onClick={handelClose}>
                         Close
                     </Button>
-                    <Button style={{ backgroundColor: '#e50914' }} variant="primary" onClick={postMovie.bind(this, item)}>
-                        Save Changes
-                    </Button>
+                    {showModal.type === "ADD" ? <Button disabled={disabled} style={{ backgroundColor: '#e50914' }} variant="primary" onClick={postMovie.bind(this, item)}>
+                        {disabled ? "It is already in the favorite" : "Add To favorite"}
+                    </Button> : <Button style={{ backgroundColor: '#e50914' }} variant="primary" onClick={handelUpdateFromModal.bind(this, item.id, item,comment)}>
+                        Update
+                    </Button>}
                 </Modal.Footer>
             </Modal>
 
