@@ -8,21 +8,21 @@ import './Home.css';
 
 function Home() {
     const [dataFromServer, setDataFromServer] = useState([]);
-    async function FetchData() {
+    async function FetchDataFromHome() {
         const serverURL = "https://movies-library-production-6ce9.up.railway.app/trending"
         const resData = await axios(serverURL);
         setDataFromServer(resData.data);
     }
 
     useEffect(() => {
-        FetchData();
+        FetchDataFromHome();
     }, [])
 
     return (
         <>
             <HeroSection />
             <div className="div-Home">
-                <MovieList data={dataFromServer} type="Home"/>
+                <MovieList data={dataFromServer} FetchDataFromHome={FetchDataFromHome} type="Home"/>
             </div>
         </>
 

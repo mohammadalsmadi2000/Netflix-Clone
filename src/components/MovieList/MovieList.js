@@ -7,37 +7,36 @@ import './MovieList.css'
 import axios from 'axios';
 
 
-function MovieList({ data, type,FetchDataList }) {
-    const [dataFromServer, setDataFromServer] = useState([]);
+function MovieList({ data, type, FetchDataList }) {
     const [mapArray, setMapArray] = useState([])
 
     async function FetchData() {
         const serverURL = "https://movies-library-production-6ce9.up.railway.app/Movies"
         const resData = await axios(serverURL);
-        setDataFromServer(resData.data)
-        console.log(dataFromServer)
+        
         return resData.data;
     }
 
 
 
     useEffect(() => {
-        console.log("inside Movie list")
         setMapArray(data);
         FetchData()
-    }, [data,dataFromServer])
-    
+    }, [data])
+
 
 
 
     async function handelDeleteFromList(id) {
         const URL = "https://movies-library-production-6ce9.up.railway.app/Movies/"
-        const del = await axios.delete(`${URL}${id}`);
+        axios.delete(`${URL}${id}`).then(() => {
+            FetchDataList();
 
-        FetchDataList();
+        })
+
     }
 
-    async function handelUpdateFromList(id,item,comment) {
+    async function handelUpdateFromList(id, item, comment) {
         const URL = "https://movies-library-production-6ce9.up.railway.app/Movies/"
         const up = await axios.put(`${URL}${id}`, {
             "title": item.title,
@@ -62,7 +61,8 @@ function MovieList({ data, type,FetchDataList }) {
                                     <Movie img={item.poster_path}
                                         title={item.title} overview={item.overview}
                                         release_date={item.release_date} item={item} comment={item.comment}
-                                        checkDataFromFav={dataFromServer} type={type} handelDeleteFromList={handelDeleteFromList} handelUpdateFromList={handelUpdateFromList}/>
+                                         type={type} handelDeleteFromList={handelDeleteFromList}
+                                        handelUpdateFromList={handelUpdateFromList}  />
                                 </Col>
                             </React.Fragment>
                         )
