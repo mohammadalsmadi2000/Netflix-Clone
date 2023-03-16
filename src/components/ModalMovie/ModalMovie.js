@@ -1,15 +1,13 @@
 
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Spinner from 'react-bootstrap/Spinner';
 
-
-function ModalMovie({ showModal, handelClose, item, dataFromServer, handelUpdate, id }) {
+function ModalMovie({ showModal, handelClose, item, dataFromServer, handelUpdate }) {
     const [comment, setComment] = useState("");
-    const [disabled, setDisabled] = useState(false);
+    
 
     async function postMovie(item) {
 
@@ -27,28 +25,22 @@ function ModalMovie({ showModal, handelClose, item, dataFromServer, handelUpdate
 
             })
             .catch(function (error) {
-                console.log(error);
             }).finally(function () {
                 window.location.reload();
 
             })
     }
-    useEffect(() => {
-        dataFromServer.forEach((el) => {
-            if (el.title === item.title) setDisabled(true);
-        })
-    }, [disabled])
 
-    function handelUpdateFromModal(id,item,comment) {
 
-        handelUpdate(id,item,comment).then(()=>{
+    function handelUpdateFromModal(id, item, comment) {
+
+        handelUpdate(id, item, comment).then(() => {
             handelClose();
 
         })
-        
+
     }
 
-    console.log(disabled)
     return (
         <>
 
@@ -56,7 +48,7 @@ function ModalMovie({ showModal, handelClose, item, dataFromServer, handelUpdate
                 <Modal.Header closeButton>
                     <Modal.Title>{item.title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><img width={"100%"} height={"500px"} src={"http://image.tmdb.org/t/p/w500/" + item.poster_path} />
+                <Modal.Body><img alt={item.title} width={"100%"} height={"500px"} src={"http://image.tmdb.org/t/p/w500/" + item.poster_path} />
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Comment</Form.Label>
@@ -69,9 +61,9 @@ function ModalMovie({ showModal, handelClose, item, dataFromServer, handelUpdate
                     <Button variant="secondary" onClick={handelClose}>
                         Close
                     </Button>
-                    {showModal.type === "ADD" ? <Button disabled={disabled} style={{ backgroundColor: '#e50914' }} variant="primary" onClick={postMovie.bind(this, item)}>
-                        {disabled ? "It is already in the favorite" : "Add To favorite"}
-                    </Button> : <Button style={{ backgroundColor: '#e50914' }} variant="primary" onClick={handelUpdateFromModal.bind(this, item.id, item,comment)}>
+                    {showModal.type === "ADD" ? <Button  style={{ backgroundColor: '#e50914' }} variant="primary" onClick={postMovie.bind(this, item)}>
+                         "Add To favorite"
+                    </Button> : <Button style={{ backgroundColor: '#e50914' }} variant="primary" onClick={handelUpdateFromModal.bind(this, item.id, item, comment)}>
                         Update
                     </Button>}
                 </Modal.Footer>
